@@ -1,7 +1,6 @@
 import React from "react";
 import Container from "../Components/Layout/Container";
 
-// Pricing data
 const pricingData = [
   {
     category: "Dry Massage Services",
@@ -72,64 +71,61 @@ const pricingData = [
 function Price() {
   const primaryColor = "#4A6741";
 
-  // Smooth scroll function
   const handleScroll = (id) => {
     const section = document.getElementById(id);
     if (section) {
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
   return (
     <div id="price" className="font-sans text-gray-800">
-      
-      {/* Hero Section */}
+
+      {/* Hero */}
       <div
-        className="py-20 text-white text-center"
+        className="py-14 md:py-20 text-white text-center px-4"
         style={{ backgroundColor: primaryColor }}
       >
         <Container>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4">
             Our Pricing
           </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="text-base md:text-xl max-w-2xl mx-auto">
             Transparent, affordable luxury — choose the treatment that fits your needs.
           </p>
         </Container>
       </div>
 
-      {/* Pricing Grid */}
-      <div className="py-20 bg-gray-50">
+      {/* Pricing */}
+      <div className="py-12 md:py-20 bg-gray-50 px-4 md:px-0">
         <Container>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
             {pricingData.map((item, idx) => (
               <div
                 key={idx}
                 className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition"
               >
-                {/* Category Header */}
                 <div
-                  className="px-6 py-4"
+                  className="px-5 md:px-6 py-4"
                   style={{ backgroundColor: primaryColor, color: "white" }}
                 >
-                  <h2 className="text-2xl font-bold">{item.category}</h2>
+                  <h2 className="text-lg md:text-2xl font-bold">
+                    {item.category}
+                  </h2>
                 </div>
 
-                {/* Services */}
-                <div className="p-6">
+                <div className="p-4 md:p-6">
                   {item.services.map((service, sidx) => (
                     <div
                       key={sidx}
                       className="flex justify-between items-center py-3 border-b border-gray-100 last:border-0"
                     >
-                      <span className="text-gray-700 font-medium">
+                      <span className="text-gray-700 text-sm md:text-base font-medium">
                         {service.duration}
                       </span>
                       <span
-                        className="font-bold text-lg"
+                        className="font-bold text-base md:text-lg"
                         style={{ color: primaryColor }}
                       >
                         {service.price}
@@ -139,26 +135,28 @@ function Price() {
                 </div>
               </div>
             ))}
+
           </div>
 
           {/* Note */}
-          <div className="mt-12 text-center text-gray-500 text-sm">
+          <div className="mt-10 md:mt-12 text-center text-gray-500 text-xs md:text-sm px-2">
             <p>* All prices are inclusive of taxes and service charges.</p>
             <p className="mt-1">
               Please contact us for special packages and loyalty discounts.
             </p>
           </div>
 
-          {/* CTA Button (FIXED) */}
-          <div className="text-center mt-10">
+          {/* CTA */}
+          <div className="text-center mt-8 md:mt-10">
             <button
               onClick={() => handleScroll("booking")}
-              className="text-white font-semibold px-8 py-3 rounded-full transition hover:opacity-90"
+              className="text-white font-semibold px-6 md:px-8 py-3 rounded-full transition hover:opacity-90 w-full sm:w-auto"
               style={{ backgroundColor: primaryColor }}
             >
               Book Your Session Now
             </button>
           </div>
+
         </Container>
       </div>
     </div>

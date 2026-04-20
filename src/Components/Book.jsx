@@ -1,241 +1,249 @@
-import React, { useState } from 'react'
-import Container from '../Components/Layout/Container'
+import React, { useState } from "react"
+import Container from "../Components/Layout/Container"
 
-// All packages with category, duration, price
 const allPackages = [
-  { category: "Dry Massage Services", duration: "60 Minutes", price: "BDT 6000" },
-  { category: "Dry Massage Services", duration: "90 Minutes", price: "BDT 8000" },
-  { category: "Dry Massage Services", duration: "120 Minutes", price: "BDT 11000" },
-  { category: "Oil Massage Services", duration: "60 Minutes", price: "BDT 6000" },
-  { category: "Oil Massage Services", duration: "90 Minutes", price: "BDT 8000" },
-  { category: "Oil Massage Services", duration: "120 Minutes", price: "BDT 11000" },
-  { category: "Hot Oil Massage Services", duration: "60 Minutes", price: "BDT 6000" },
-  { category: "Hot Oil Massage Services", duration: "90 Minutes", price: "BDT 8500" },
-  { category: "Hot Oil Massage Services", duration: "120 Minutes", price: "BDT 12000" },
-  { category: "Deep Tissue Massage", duration: "60 Minutes", price: "BDT 6000" },
-  { category: "Deep Tissue Massage", duration: "90 Minutes", price: "BDT 8500" },
-  { category: "Deep Tissue Massage", duration: "120 Minutes", price: "BDT 10500" },
-  { category: "Nuru Massage Services", duration: "60 Minutes", price: "BDT 8500" },
-  { category: "Nuru Massage Services", duration: "90 Minutes", price: "BDT 10000" },
-  { category: "Nuru Massage Services", duration: "120 Minutes", price: "BDT 15000" },
-  { category: "Body To Body Massage", duration: "60 Minutes", price: "BDT 8500" },
-  { category: "Body To Body Massage", duration: "90 Minutes", price: "BDT 12500" },
-  { category: "Body To Body Massage", duration: "120 Minutes", price: "BDT 16000" },
-  { category: "Two Girls Massage", duration: "60 Minutes", price: "BDT 15000" },
-  { category: "Two Girls Massage", duration: "90 Minutes", price: "BDT 20000" },
-  { category: "Two Girls Massage", duration: "120 Minutes", price: "BDT 25000" },
-  { category: "Body Scrub Massage", duration: "60 Minutes", price: "BDT 15000" },
-  { category: "Body Scrub Massage", duration: "90 Minutes", price: "BDT 20000" },
-  { category: "Body Scrub Massage", duration: "120 Minutes", price: "BDT 25000" }
+  { category: "Dry Massage", duration: "60 Min", price: "BDT 6000" },
+  { category: "Dry Massage", duration: "90 Min", price: "BDT 8000" },
+  { category: "Oil Massage", duration: "120 Min", price: "BDT 11000" },
+  { category: "Deep Tissue", duration: "90 Min", price: "BDT 8500" },
+  { category: "Body To Body", duration: "60 Min", price: "BDT 8500" }
 ]
 
-// Time slots
 const timeSlots = [
-  "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
-  "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM",
-  "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"
+  "09:00 AM","10:00 AM","11:00 AM","12:00 PM",
+  "01:00 PM","02:00 PM","03:00 PM","04:00 PM",
+  "05:00 PM","06:00 PM","07:00 PM","08:00 PM"
 ]
 
-function Book() {
+function BookWizard() {
   const primaryColor = "#4A6741"
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    package: '',
-    date: '',
-    time: '',
-    notes: ''
+
+  const [step, setStep] = useState(1)
+
+  const [data, setData] = useState({
+    package: "",
+    date: "",
+    time: "",
+    name: "",
+    phone: "",
+    notes: ""
   })
-  
-  const [errors, setErrors] = useState({})
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }))
-    }
+    setData({ ...data, [e.target.name]: e.target.value })
   }
 
-  const validate = () => {
-    const newErrors = {}
-    if (!formData.name.trim()) newErrors.name = "Name is required"
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Phone number is required"
-    } else if (!/^[0-9+\-\s()]+$/.test(formData.phone)) {
-      newErrors.phone = "Please enter a valid phone number"
-    }
-    if (!formData.package) newErrors.package = "Please select a package"
-    if (!formData.date) newErrors.date = "Please select a date"
-    if (!formData.time) newErrors.time = "Please select a time"
-    
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+  const next = () => setStep(step + 1)
+  const back = () => setStep(step - 1)
+
+  const isStep1Valid = data.package
+  const isStep2Valid = data.date && data.time
+  const isStep3Valid = data.name && data.phone
+
+  const handleSubmit = () => {
+    const message = `
+*New Booking Request*
+
+Package: ${data.package}
+Date: ${data.date}
+Time: ${data.time}
+Name: ${data.name}
+Phone: ${data.phone}
+Notes: ${data.notes || "N/A"}
+    `
+
+    const phone = "8801614326888"
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank")
   }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!validate()) return
-
-    setIsSubmitting(true)
-
-    // Construct WhatsApp message (without email)
-    const message = `*New Booking Request from Website*%0A%0A
-*Name:* ${formData.name}%0A
-*Phone:* ${formData.phone}%0A
-*Package:* ${formData.package}%0A
-*Preferred Date:* ${formData.date}%0A
-*Preferred Time:* ${formData.time}%0A
-*Special Notes:* ${formData.notes || 'None'}%0A%0A
-*Sent from Silken Touch Spa Booking Form*`
-
-    // WhatsApp number (international format without '+' or spaces)
-    const phoneNumber = '8801614326888'  // 01614326888 -> 8801614326888
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
-
-    // Open WhatsApp in a new tab
-    window.open(whatsappUrl, '_blank')
-
-    // Reset form
-    setFormData({
-      name: '', phone: '', package: '', date: '', time: '', notes: ''
-    })
-    setIsSubmitting(false)
-    
-    // Optional alert
-    alert('Redirecting to WhatsApp... Please send the message to confirm your booking.')
-  }
-
-  const today = new Date().toISOString().split('T')[0]
 
   return (
-    <div id='booking' className="font-sans text-gray-800">
-      {/* Hero Section */}
-      <div className="py-20 text-white text-center" style={{ backgroundColor: primaryColor }}>
-        <Container>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Book a Session</h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto">
-            Reserve your time of tranquility — fill out the form and we'll confirm your appointment.
+    <div id="booking" className="py-12 md:py-20 bg-gray-50">
+
+      <Container>
+
+        {/* HEADER */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold">Book Your Session</h1>
+          <p className="text-gray-500 mt-2 text-sm md:text-base">
+            Simple 4-step booking process
           </p>
-        </Container>
-      </div>
+        </div>
 
-      {/* Booking Form */}
-      <div className="py-20 bg-gray-50">
-        <Container>
-          <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-8">
-            <form onSubmit={handleSubmit}>
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Name */}
-                <div>
-                  <label className="block text-gray-700 font-semibold mb-2">Full Name *</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 transition ${errors.name ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-amber-200'}`}
-                  />
-                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-                </div>
+        {/* PROGRESS BAR */}
+        <div className="flex justify-between mb-8 text-xs md:text-sm">
+          {["Service", "Schedule", "Details", "Confirm"].map((label, i) => (
+            <div key={i} className="flex-1 text-center">
+              <div
+                className={`h-2 rounded-full mx-1 ${
+                  step > i + 1 ? "bg-green-600" :
+                  step === i + 1 ? "bg-amber-500" : "bg-gray-300"
+                }`}
+              />
+              <p className="mt-2">{label}</p>
+            </div>
+          ))}
+        </div>
 
-                {/* Phone */}
-                <div>
-                  <label className="block text-gray-700 font-semibold mb-2">Phone Number *</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+880 1XXX XXXXXX"
-                    className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 transition ${errors.phone ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-amber-200'}`}
-                  />
-                  {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
-                </div>
+        {/* CARD */}
+        <div className="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-md">
 
-                {/* Package Selection (with duration & price) */}
-                <div>
-                  <label className="block text-gray-700 font-semibold mb-2">Select Package *</label>
-                  <select
-                    name="package"
-                    value={formData.package}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 transition ${errors.package ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-amber-200'}`}
+          {/* STEP 1 */}
+          {step === 1 && (
+            <div>
+              <h2 className="text-xl font-bold mb-4">Choose Package</h2>
+
+              <div className="space-y-3">
+                {allPackages.map((p, i) => (
+                  <div
+                    key={i}
+                    onClick={() => setData({ ...data, package: `${p.category} - ${p.duration} - ${p.price}` })}
+                    className={`p-4 border rounded-xl cursor-pointer transition ${
+                      data.package.includes(p.price)
+                        ? "border-green-600 bg-green-50"
+                        : "hover:border-gray-400"
+                    }`}
                   >
-                    <option value="">Choose a package</option>
-                    {allPackages.map((pkg, idx) => (
-                      <option key={idx} value={`${pkg.category} - ${pkg.duration} - ${pkg.price}`}>
-                        {pkg.category} - {pkg.duration} - {pkg.price}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.package && <p className="text-red-500 text-sm mt-1">{errors.package}</p>}
-                </div>
-
-                {/* Date */}
-                <div>
-                  <label className="block text-gray-700 font-semibold mb-2">Preferred Date *</label>
-                  <input
-                    type="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    min={today}
-                    className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 transition ${errors.date ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-amber-200'}`}
-                  />
-                  {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}
-                </div>
-
-                {/* Time */}
-                <div>
-                  <label className="block text-gray-700 font-semibold mb-2">Preferred Time *</label>
-                  <select
-                    name="time"
-                    value={formData.time}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 transition ${errors.time ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-amber-200'}`}
-                  >
-                    <option value="">Select a time slot</option>
-                    {timeSlots.map((slot, idx) => (
-                      <option key={idx} value={slot}>{slot}</option>
-                    ))}
-                  </select>
-                  {errors.time && <p className="text-red-500 text-sm mt-1">{errors.time}</p>}
-                </div>
-
-                {/* Notes (full width) */}
-                <div className="md:col-span-2">
-                  <label className="block text-gray-700 font-semibold mb-2">Special Requests or Notes</label>
-                  <textarea
-                    name="notes"
-                    value={formData.notes}
-                    onChange={handleChange}
-                    rows="4"
-                    placeholder="Any allergies, preferences, or questions..."
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-200"
-                  ></textarea>
-                </div>
+                    <p className="font-semibold">{p.category}</p>
+                    <p className="text-sm text-gray-500">{p.duration}</p>
+                    <p className="text-green-700 font-bold">{p.price}</p>
+                  </div>
+                ))}
               </div>
 
-              {/* Submit Button */}
-              <div className="mt-8 text-center">
+              <button
+                disabled={!isStep1Valid}
+                onClick={next}
+                className="mt-6 w-full py-3 rounded-xl text-white disabled:opacity-50"
+                style={{ backgroundColor: primaryColor }}
+              >
+                Next
+              </button>
+            </div>
+          )}
+
+          {/* STEP 2 */}
+          {step === 2 && (
+            <div>
+              <h2 className="text-xl font-bold mb-4">Choose Date & Time</h2>
+
+              <input
+                type="date"
+                name="date"
+                value={data.date}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-xl mb-4"
+              />
+
+              <div className="grid grid-cols-3 gap-2">
+                {timeSlots.map((t, i) => (
+                  <div
+                    key={i}
+                    onClick={() => setData({ ...data, time: t })}
+                    className={`p-2 text-center border rounded-lg cursor-pointer text-sm ${
+                      data.time === t ? "bg-green-100 border-green-600" : ""
+                    }`}
+                  >
+                    {t}
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button onClick={back} className="w-1/2 py-3 border rounded-xl">
+                  Back
+                </button>
                 <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="text-white font-semibold px-8 py-3 rounded-full transition hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
+                  disabled={!isStep2Valid}
+                  onClick={next}
+                  className="w-1/2 py-3 text-white rounded-xl disabled:opacity-50"
                   style={{ backgroundColor: primaryColor }}
                 >
-                  {isSubmitting ? 'Redirecting...' : 'Request Booking'}
+                  Next
                 </button>
               </div>
-            </form>
-          </div>
-        </Container>
-      </div>
+            </div>
+          )}
+
+          {/* STEP 3 */}
+          {step === 3 && (
+            <div>
+              <h2 className="text-xl font-bold mb-4">Your Details</h2>
+
+              <input
+                name="name"
+                placeholder="Full Name"
+                value={data.name}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-xl mb-3"
+              />
+
+              <input
+                name="phone"
+                placeholder="Phone Number"
+                value={data.phone}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-xl mb-3"
+              />
+
+              <textarea
+                name="notes"
+                placeholder="Notes (optional)"
+                value={data.notes}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-xl"
+              />
+
+              <div className="flex gap-3 mt-6">
+                <button onClick={back} className="w-1/2 py-3 border rounded-xl">
+                  Back
+                </button>
+                <button
+                  disabled={!isStep3Valid}
+                  onClick={next}
+                  className="w-1/2 py-3 text-white rounded-xl disabled:opacity-50"
+                  style={{ backgroundColor: primaryColor }}
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* STEP 4 */}
+          {step === 4 && (
+            <div>
+              <h2 className="text-xl font-bold mb-4">Confirm Booking</h2>
+
+              <div className="text-sm space-y-2 bg-gray-50 p-4 rounded-xl">
+                <p><b>Package:</b> {data.package}</p>
+                <p><b>Date:</b> {data.date}</p>
+                <p><b>Time:</b> {data.time}</p>
+                <p><b>Name:</b> {data.name}</p>
+                <p><b>Phone:</b> {data.phone}</p>
+                <p><b>Notes:</b> {data.notes || "N/A"}</p>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button onClick={back} className="w-1/2 py-3 border rounded-xl">
+                  Back
+                </button>
+
+                <button
+                  onClick={handleSubmit}
+                  className="w-1/2 py-3 text-white rounded-xl"
+                  style={{ backgroundColor: primaryColor }}
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          )}
+
+        </div>
+
+      </Container>
     </div>
   )
 }
 
-export default Book
+export default BookWizard

@@ -1,7 +1,6 @@
 import React from 'react'
 import Container from '../Components/Layout/Container'
 
-// Sample review data – replace with actual reviews from your customers
 const reviewsData = [
   {
     id: 1,
@@ -17,7 +16,7 @@ const reviewsData = [
     name: "Rafiqul Islam",
     location: "Baridhara, Dhaka",
     rating: 5,
-    text: "One of the best spas in Gulshan. Professional staff, clean environment, and authentic treatments. The deep tissue massage really helped with my back pain. Will definitely come back.",
+    text: "One of the best spas in Gulshan. Professional staff, clean environment, and authentic treatments. The deep tissue massage really helped with my back pain.",
     date: "February 2025",
     image: "https://randomuser.me/api/portraits/men/32.jpg"
   },
@@ -26,7 +25,7 @@ const reviewsData = [
     name: "Tahmina Khan",
     location: "Banani, Dhaka",
     rating: 4,
-    text: "Lovely spa with great service. The body scrub and facial were wonderful. Only small issue was the waiting time, but overall a fantastic experience. The staff is very friendly.",
+    text: "Lovely spa with great service. The body scrub and facial were wonderful. Only small issue was waiting time, but overall great experience.",
     date: "January 2025",
     image: "https://randomuser.me/api/portraits/women/68.jpg"
   },
@@ -35,87 +34,103 @@ const reviewsData = [
     name: "Michael D'Souza",
     location: "Gulshan-2, Dhaka",
     rating: 5,
-    text: "I've been to many spas around the world, and Silken Touch stands out for its attention to detail and genuine care. The two girls massage package was incredible. Pure bliss!",
+    text: "Silken Touch stands out for its attention to detail and care. The two girls massage package was incredible. Pure bliss!",
     date: "December 2024",
     image: "https://randomuser.me/api/portraits/men/45.jpg"
   }
 ]
 
-// Star rating component
-const StarRating = ({ rating }) => {
-  return (
-    <div className="flex gap-1">
-      {[...Array(5)].map((_, i) => (
-        <span key={i} className="text-xl">
-          {i < rating ? "★" : "☆"}
-        </span>
-      ))}
-    </div>
-  )
-}
+const StarRating = ({ rating }) => (
+  <div className="flex gap-1 text-base md:text-xl">
+    {[...Array(5)].map((_, i) => (
+      <span key={i}>
+        {i < rating ? "★" : "☆"}
+      </span>
+    ))}
+  </div>
+)
 
 function Reviews() {
   const primaryColor = "#4A6741"
 
   return (
-    <div id='review' className="py-20 bg-gray-50">
+    <div id="review" className="py-12 md:py-20 bg-gray-50 px-4 md:px-0">
+
       <Container>
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+
+        {/* HEADER */}
+        <div className="text-center mb-10 md:mb-12">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-800">
             What Our Clients Say
           </h2>
-          <div className="w-24 h-1 mx-auto mt-4 mb-6" style={{ backgroundColor: primaryColor }}></div>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+
+          <div
+            className="w-16 md:w-24 h-1 mx-auto mt-3 md:mt-4 mb-4 md:mb-6"
+            style={{ backgroundColor: primaryColor }}
+          />
+
+          <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
             Real experiences from our valued guests — your wellness journey inspires us.
           </p>
         </div>
 
-        {/* Reviews Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
+
           {reviewsData.map((review) => (
             <div
               key={review.id}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-6 border border-gray-100"
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-4 md:p-6 border border-gray-100"
             >
-              {/* Review Header */}
-              <div className="flex items-center gap-4 mb-4">
+
+              {/* USER INFO */}
+              <div className="flex items-center gap-3 md:gap-4 mb-4">
                 <img
                   src={review.image}
                   alt={review.name}
-                  className="w-14 h-14 rounded-full object-cover"
+                  className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover"
                 />
+
                 <div>
-                  <h3 className="font-bold text-lg text-gray-800">{review.name}</h3>
-                  <p className="text-sm text-gray-500">{review.location}</p>
+                  <h3 className="font-bold text-base md:text-lg text-gray-800">
+                    {review.name}
+                  </h3>
+                  <p className="text-xs md:text-sm text-gray-500">
+                    {review.location}
+                  </p>
                 </div>
               </div>
 
-              {/* Rating & Date */}
+              {/* RATING */}
               <div className="flex justify-between items-center mb-3">
                 <StarRating rating={review.rating} />
-                <span className="text-sm text-gray-400">{review.date}</span>
+                <span className="text-xs md:text-sm text-gray-400">
+                  {review.date}
+                </span>
               </div>
 
-              {/* Review Text */}
-              <p className="text-gray-700 leading-relaxed italic">
+              {/* TEXT */}
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed italic">
                 "{review.text}"
               </p>
 
-              {/* Verified Badge (optional) */}
-              <div className="mt-4 flex items-center gap-2">
-                <span className="text-green-600 text-sm">✓ Verified Customer</span>
+              {/* BADGE */}
+              <div className="mt-4 text-xs md:text-sm text-green-600 flex items-center gap-2">
+                ✓ Verified Customer
               </div>
+
             </div>
           ))}
+
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-12">
-          <p className="text-gray-500 text-sm mt-3">
+        {/* CTA */}
+        <div className="text-center mt-10 md:mt-12">
+          <p className="text-gray-500 text-xs md:text-sm">
             Share your experience and help others discover tranquility.
           </p>
         </div>
+
       </Container>
     </div>
   )
