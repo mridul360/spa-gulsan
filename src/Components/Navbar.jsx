@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Container from "./Layout/Container";
-import logo from "../assets/spaLogo.png"; // Optional: Add a logo image in the assets folder and import it here
+import logo from "../assets/spaLogo.png";
 
 const Logo = () => (
   <div className="flex items-center gap-2">
@@ -22,7 +22,7 @@ export default function Navbar() {
 
   const handleScroll = (id, name) => {
     setActive(name);
-    setMenuOpen(false); // close mobile menu
+    setMenuOpen(false);
 
     const section = document.getElementById(id);
     if (section) {
@@ -33,7 +33,6 @@ export default function Navbar() {
     }
   };
 
-  // Scroll spy
   useEffect(() => {
     const handleScrollSpy = () => {
       const sections = navLinks.map((link) =>
@@ -64,7 +63,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full z-[9999] bg-white shadow-sm">
+    <div className="fixed top-0 left-0 w-full z-[9999] bg-white/40 backdrop-blur-md shadow-sm">
       <Container>
         <nav className="flex items-center justify-between h-[70px] px-4 md:px-8">
 
@@ -117,7 +116,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden flex flex-col gap-2 px-4 pb-4 bg-white border-t">
+          <div className="md:hidden flex flex-col gap-2 px-4 pb-4 bg-white/60 backdrop-blur-md border-t">
             {navLinks.map((link) => (
               <button
                 key={link.id}
