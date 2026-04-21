@@ -12,7 +12,7 @@ const WhatsAppContactWidget = () => {
   const messagesEndRef = useRef(null);
 
   // Replace with your WhatsApp number
-  const phoneNumber = "01614326888";
+  const phoneNumber = "8801863905937";
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({

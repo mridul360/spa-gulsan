@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Container from "./Layout/Container";
+import logo from "../assets/spaLogo.png"; // Optional: Add a logo image in the assets folder and import it here
 
 const Logo = () => (
   <div className="flex items-center gap-2">
-    <div className="font-bold text-[#3a5c3a] text-xl">Gulshan</div>
+    <img src={logo} alt="Logo" className="h-15 w-15" />
   </div>
 );
 
@@ -78,7 +79,7 @@ export default function Navbar() {
                 onClick={() => {
                   if (link.name === "Contact") {
                     window.open(
-                      "https://wa.me/8801614326888?text=Hi%20I%20want%20to%20book%20a%20session",
+                      "https://api.whatsapp.com/message/HZBN77UPZTBQH1?autoload=1&app_absent=0",
                       "_blank"
                     );
                     return;
@@ -123,7 +124,7 @@ export default function Navbar() {
                 onClick={() => {
                   if (link.name === "Contact") {
                     window.open(
-                      "https://wa.me/8801614326888?text=Hi%20I%20want%20to%20book%20a%20session",
+                      "https://wa.me/8801863905937?text=Hi%20I%20want%20to%20book%20a%20session",
                       "_blank"
                     );
                     setMenuOpen(false);
