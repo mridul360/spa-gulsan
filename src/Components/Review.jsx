@@ -20,24 +20,7 @@ const reviewsData = [
     date: "February 2025",
     image: "https://randomuser.me/api/portraits/men/32.jpg"
   },
-  {
-    id: 3,
-    name: "Tahmina Khan",
-    location: "Banani, Dhaka",
-    rating: 4,
-    text: "Lovely spa with great service. The body scrub and facial were wonderful. Only small issue was waiting time, but overall great experience.",
-    date: "January 2025",
-    image: "https://randomuser.me/api/portraits/women/68.jpg"
-  },
-  {
-    id: 4,
-    name: "Michael D'Souza",
-    location: "Gulshan-2, Dhaka",
-    rating: 5,
-    text: "Silken Touch stands out for its attention to detail and care. The two girls massage package was incredible. Pure bliss!",
-    date: "December 2024",
-    image: "https://randomuser.me/api/portraits/men/45.jpg"
-  }
+ 
 ]
 
 const StarRating = ({ rating }) => (

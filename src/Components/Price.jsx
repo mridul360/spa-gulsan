@@ -5,65 +5,65 @@ const pricingData = [
   {
     category: "Dry Massage Services",
     services: [
-      { duration: "60 Minutes", price: "BDT 6000" },
-      { duration: "90 Minutes", price: "BDT 8000" },
-      { duration: "120 Minutes", price: "BDT 11000" },
+      { duration: "60 Minutes Happy Ending", price: "BDT 6000" },
+      { duration: "90 Minutes Happy Ending", price: "BDT 8000" },
+      { duration: "120 Minutes Happy Ending", price: "BDT 11000" },
     ],
   },
   {
     category: "Oil Massage Services",
     services: [
-      { duration: "60 Minutes", price: "BDT 6000" },
-      { duration: "90 Minutes", price: "BDT 8000" },
-      { duration: "120 Minutes", price: "BDT 11000" },
+      { duration: "60 Minutes Happy Ending", price: "BDT 6000" },
+      { duration: "90 Minutes Happy Ending", price: "BDT 8000" },
+      { duration: "120 Minutes Happy Ending", price: "BDT 11000" },
     ],
   },
   {
     category: "Hot Oil Massage Services",
     services: [
-      { duration: "60 Minutes", price: "BDT 6000" },
-      { duration: "90 Minutes", price: "BDT 8500" },
-      { duration: "120 Minutes", price: "BDT 12000" },
+      { duration: "60 Minutes Happy Ending", price: "BDT 6000" },
+      { duration: "90 Minutes Happy Ending", price: "BDT 8500" },
+      { duration: "120 Minutes Happy Ending", price: "BDT 12000" },
     ],
   },
   {
     category: "Deep Tissue Massage",
     services: [
-      { duration: "60 Minutes", price: "BDT 6000" },
-      { duration: "90 Minutes", price: "BDT 8500" },
-      { duration: "120 Minutes", price: "BDT 10500" },
+      { duration: "60 Minutes Happy Ending", price: "BDT 6000" },
+      { duration: "90 Minutes Happy Ending", price: "BDT 8500" },
+      { duration: "120 Minutes Happy Ending", price: "BDT 10500" },
     ],
   },
   {
     category: "Nuru Massage Services",
     services: [
-      { duration: "60 Minutes", price: "BDT 8500" },
-      { duration: "90 Minutes", price: "BDT 10000" },
-      { duration: "120 Minutes", price: "BDT 15000" },
+      { duration: "60 Minutes Happy Ending", price: "BDT 8500" },
+      { duration: "90 Minutes Happy Ending", price: "BDT 10000" },
+      { duration: "120 Minutes Happy Ending", price: "BDT 15000" },
     ],
   },
   {
     category: "Body To Body Massage",
     services: [
-      { duration: "60 Minutes", price: "BDT 8500" },
-      { duration: "90 Minutes", price: "BDT 12500" },
-      { duration: "120 Minutes", price: "BDT 16000" },
+      { duration: "60 Minutes Happy Ending", price: "BDT 8500" },
+      { duration: "90 Minutes Happy Ending", price: "BDT 12500" },
+      { duration: "120 Minutes Happy Ending", price: "BDT 16000" },
     ],
   },
   {
     category: "Two Girls Massage",
     services: [
-      { duration: "60 Minutes", price: "BDT 15000" },
-      { duration: "90 Minutes", price: "BDT 20000" },
-      { duration: "120 Minutes", price: "BDT 25000" },
+      { duration: "60 Minutes Happy Ending", price: "BDT 15000" },
+      { duration: "90 Minutes Happy Ending", price: "BDT 20000" },
+      { duration: "120 Minutes Happy Ending", price: "BDT 25000" },
     ],
   },
   {
     category: "Body Scrub Massage",
     services: [
-      { duration: "60 Minutes", price: "BDT 15000" },
-      { duration: "90 Minutes", price: "BDT 20000" },
-      { duration: "120 Minutes", price: "BDT 25000" },
+      { duration: "60 Minutes Happy Ending", price: "BDT 15000" },
+      { duration: "90 Minutes Happy Ending", price: "BDT 20000" },
+      { duration: "120 Minutes Happy Ending", price: "BDT 25000" },
     ],
   },
 ];
