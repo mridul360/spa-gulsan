@@ -117,7 +117,7 @@ function Book() {
 
         {/* ── Card: flex column so buttons sit outside scroll area ── */}
         <div
-          className="max-w-2xl mx-auto bg-[#B0C5DD] rounded-2xl shadow-md overflow-hidden flex flex-col min-h-[500px] max-h-[90vh] md:max-h-[620px]"
+          className="max-w-2xl mx-auto bg-[#FFEDDF] rounded-2xl shadow-md overflow-hidden flex flex-col min-h-[500px] max-h-[90vh] md:max-h-[620px]"
         >
 
           {/* ── Scrollable Content Area ── */}
@@ -130,7 +130,7 @@ function Book() {
                 <div className="space-y-6">
                   {Object.entries(groupedPackages).map(([category, pkgs]) => (
                     <div key={category}>
-                      <h3 className="text-sm font-bold uppercase tracking-widest text-[#43464E] mb-3 border-b border-[#D5BADB] pb-1">
+                      <h3 className="text-sm font-bold uppercase tracking-widest text-[#43464E] mb-3 border-b border-[#000000] pb-1">
                         {category}
                       </h3>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -142,7 +142,7 @@ function Book() {
                             <button
                               key={i}
                               onClick={() => setData({ ...data, package: pkg })}
-                              className={`p-3 border rounded-xl cursor-pointer text-center transition-all
+                              className={`p-3 border rounded-xl cursor-pointer text-center transition-all bg-[#B8D4BA]
                                 ${isSelected
                                   ? "border-[#43464E] bg-[#D5BADB]/30"
                                   : "border-gray-200 hover:border-gray-400"
