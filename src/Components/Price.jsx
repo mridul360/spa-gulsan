@@ -104,7 +104,7 @@ function Price() {
             {pricingData.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-[#F0F8FF] rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition"
+                className="bg-[#CFECEC] rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition"
               >
                 <div
                   className="px-5 md:px-6 py-4"
