@@ -79,7 +79,7 @@ function Book() {
   }
 
   return (
-    <div id="booking" className="py-12 md:py-20 bg-white">
+    <div id="booking" className="py-12 md:py-20 bg-[#D4BADA]">
       <Container>
 
         {/* Header */}
@@ -117,7 +117,7 @@ function Book() {
 
         {/* ── Card: flex column so buttons sit outside scroll area ── */}
         <div
-          className="max-w-2xl mx-auto bg-white rounded-2xl shadow-md overflow-hidden flex flex-col min-h-[500px] max-h-[90vh] md:max-h-[620px]"
+          className="max-w-2xl mx-auto bg-[#B0C5DD] rounded-2xl shadow-md overflow-hidden flex flex-col min-h-[500px] max-h-[90vh] md:max-h-[620px]"
         >
 
           {/* ── Scrollable Content Area ── */}

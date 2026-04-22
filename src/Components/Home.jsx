@@ -9,7 +9,7 @@ import Footer from './Footer'
 
 const Home = () => {
   return (
-    <div className="w-full min-h-screen bg-white flex flex-col">
+    <div className="w-full min-h-screen bg-[#D4BADA] flex flex-col">
 
       {/* Navbar is already fixed in its component, so no wrapper needed */}
       <Navbar />
