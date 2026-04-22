@@ -2,7 +2,7 @@ import React from 'react'
 import Container from '../Components/Layout/Container'
 
 function Footer() {
-  const primaryColor = "#4A6741"
+  const primaryColor = "#3C3F44"
   
   const quickLinks = [
     { name: "About Us", href: "/" },
@@ -107,7 +107,7 @@ function Footer() {
     <li className="flex md:justify-start gap-2">
       <span>📍</span>
       <span className="text-white/80">
-        Gulshan-1, Dhaka
+        Gulshan-2, Dhaka
       </span>
     </li>
 

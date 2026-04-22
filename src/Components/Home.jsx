@@ -9,30 +9,28 @@ import Footer from './Footer'
 
 const Home = () => {
   return (
-    <div className="w-full min-h-screen flex flex-col">
+    <div className="w-full min-h-screen bg-white flex flex-col">
 
-      {/* Sticky Navbar (optional) */}
-      <div className="w-full sticky top-0 z-50">
-        <Navbar />
-      </div>
+      {/* Navbar is already fixed in its component, so no wrapper needed */}
+      <Navbar />
 
       {/* Main Content Wrapper */}
-      <main className="flex-1 w-full">
+      <main className="flex-1 w-full pt-[70px]">
         
-        {/* Each section gets consistent spacing */}
-        <section className="w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+        {/* Sections use inner Containers for horizontal padding */}
+        <section className="w-full py-6 sm:py-10">
           <About />
         </section>
 
-        <section className="w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-10 bg-gray-50">
+        <section className="w-full py-6 sm:py-10 bg-[#F3C2A4]">
           <Price />
         </section>
 
-        <section className="w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+        <section className="w-full py-6 sm:py-10">
           <Book />
         </section>
 
-        <section className="w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-10 bg-gray-50">
+        <section className="w-full py-6 sm:py-10 bg-[#F3C2A4]">
           <Review />
         </section>
 

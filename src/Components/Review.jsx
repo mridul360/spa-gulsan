@@ -34,10 +34,10 @@ const StarRating = ({ rating }) => (
 )
 
 function Reviews() {
-  const primaryColor = "#4A6741"
+  const primaryColor = "#3C3F44"
 
   return (
-    <div id="review" className="py-12 md:py-20 bg-gray-50 px-4 md:px-0">
+    <div id="review" className="py-12 md:py-20 bg-[#F3C2A4] px-4 md:px-0">
 
       <Container>
 
