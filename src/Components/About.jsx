@@ -1,6 +1,7 @@
 import React from 'react'
 import Container from './Layout/Container'
 import dryMassage from '../assets/dry-massage.webp'
+import mmaaaasss from '../assets/mmaaaasss.webp'
 
 const About = () => {
   return (
@@ -52,6 +53,36 @@ const About = () => {
                 "The art of relaxation."
               </p>
             </div>
+          </div>
+
+        </section>
+      </Container>
+
+      {/* EXPERTISE SECTION */}
+      <Container>
+        <section className="py-12 md:py-20 grid grid-cols-1 md:md:grid-cols-2 gap-10 md:gap-16 items-center border-t border-[#43464E]/5">
+
+          {/* IMAGE */}
+          <div className="relative">
+            <img
+              src={mmaaaasss}
+              alt="Therapeutic massage"
+              className="rounded-lg shadow-xl w-full h-auto object-cover"
+            />
+          </div>
+
+          {/* TEXT */}
+          <div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-5 md:mb-6 text-[#43464E]">
+              Unmatched Expertise
+            </h2>
+
+            <p className="text-stone-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">
+              Every treatment at our hub is delivered by certified professionals who specialize in deep relaxation and muscle recovery. We prioritize your comfort and results above all else.
+            </p>
+            <p className="text-stone-600 leading-relaxed text-sm md:text-base">
+              Experience the perfect balance of therapeutic pressure and soothing ambiance, designed to melt away the stress of urban life.
+            </p>
           </div>
 
         </section>
