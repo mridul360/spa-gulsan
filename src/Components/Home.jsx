@@ -22,7 +22,7 @@ const Home = () => {
           <About />
         </section>
 
-        <section className="w-full py-6 sm:py-10 bg-[#F3C2A4]">
+        <section className="w-full py-6 sm:py-10 bg-[#D5BADB]">
           <Price />
         </section>
 
@@ -30,7 +30,7 @@ const Home = () => {
           <Book />
         </section>
 
-        <section className="w-full py-6 sm:py-10 bg-[#F3C2A4]">
+        <section className="w-full py-6 sm:py-10 bg-[#D5BADB]">
           <Review />
         </section>
 

@@ -23,8 +23,8 @@ const reviewsData = [
  
 ]
 
-const StarRating = ({ rating }) => (
-  <div className="flex gap-1 text-base md:text-xl">
+const StarRating = ({ rating, color }) => (
+  <div className="flex gap-1 text-base md:text-xl" style={{ color }}>
     {[...Array(5)].map((_, i) => (
       <span key={i}>
         {i < rating ? "★" : "☆"}
@@ -34,10 +34,10 @@ const StarRating = ({ rating }) => (
 )
 
 function Reviews() {
-  const primaryColor = "#3C3F44"
+  const primaryColor = "#43464E"
 
   return (
-    <div id="review" className="py-12 md:py-20 bg-[#F3C2A4] px-4 md:px-0">
+    <div id="review" className="py-12 md:py-20 bg-[#D5BADB] px-4 md:px-0">
 
       <Container>
 
@@ -86,7 +86,7 @@ function Reviews() {
 
               {/* RATING */}
               <div className="flex justify-between items-center mb-3">
-                <StarRating rating={review.rating} />
+                <StarRating rating={review.rating} color={primaryColor} />
                 <span className="text-xs md:text-sm text-gray-400">
                   {review.date}
                 </span>
@@ -98,7 +98,7 @@ function Reviews() {
               </p>
 
               {/* BADGE */}
-              <div className="mt-4 text-xs md:text-sm text-green-600 flex items-center gap-2">
+              <div className="mt-4 text-xs md:text-sm flex items-center gap-2" style={{ color: primaryColor }}>
                 ✓ Verified Customer
               </div>
 

@@ -167,7 +167,7 @@ const WhatsAppContactWidget = () => {
             {/* Header */}
             <div
               onClick={() => setOpen(false)}
-              className="bg-[#25D366] text-white px-4 py-3 flex justify-between cursor-pointer"
+              className="bg-[#43464E] text-white px-4 py-3 flex justify-between cursor-pointer"
             >
               <span className="font-medium text-sm">Chat with us</span>
               <span>⌄</span>
@@ -180,7 +180,7 @@ const WhatsAppContactWidget = () => {
                   key={i}
                   className={`max-w-[80%] px-3 py-2 rounded-xl text-sm shadow animate-fadeInUp ${
                     msg.type === "user"
-                      ? "bg-[#dcf8c6] self-end"
+                      ? "bg-[#D5BADB]/50 self-end"
                       : "bg-white self-start"
                   }`}
                 >
@@ -214,7 +214,7 @@ const WhatsAppContactWidget = () => {
               />
               <button
                 onClick={sendMessage}
-                className="bg-[#25D366] text-white px-4 rounded-full hover:scale-105 transition"
+                className="bg-[#43464E] text-white px-4 rounded-full hover:scale-105 transition"
               >
                 Send
               </button>
@@ -225,7 +225,7 @@ const WhatsAppContactWidget = () => {
         {/* Floating Button */}
         <button
           onClick={() => setOpen(!open)}
-          className="bg-[#25D366] text-white w-14 h-14 rounded-full text-2xl shadow-lg animate-pulse-soft hover:scale-110 transition"
+          className="bg-[#43464E] text-white w-14 h-14 rounded-full text-2xl shadow-lg animate-pulse-soft hover:scale-110 transition"
         >
           {open ? "✕" : "💬"}
         </button>

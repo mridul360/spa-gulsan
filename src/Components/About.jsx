@@ -7,7 +7,7 @@ const About = () => {
     <div id="about" className="bg-white text-stone-800">
 
       {/* HERO */}
-      <section className="bg-[#3C3F44] py-14 md:py-20 px-4 text-center text-white">
+      <section className="bg-[#43464E] py-14 md:py-20 px-4 text-center text-white">
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-3 md:mb-4">
           Our Heritage
         </h1>
@@ -23,7 +23,7 @@ const About = () => {
 
           {/* TEXT - Order 2 on mobile to show image first */}
           <div className="order-2 md:order-1">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-5 md:mb-6 text-[#3C3F44]">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-5 md:mb-6 text-[#43464E]">
               A Journey to Serenity
             </h2>
 
@@ -47,7 +47,7 @@ const About = () => {
             />
 
             {/* QUOTE (hidden on mobile) */}
-            <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-[#b5a96e] p-4 md:p-8 hidden sm:block">
+            <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-[#808080] p-4 md:p-8 hidden sm:block">
               <p className="text-lg md:text-2xl text-white italic">
                 "The art of relaxation."
               </p>
@@ -58,13 +58,13 @@ const About = () => {
       </Container>
 
       {/* VALUES */}
-      <section className="bg-[#F3C2A4] py-12 md:py-20 px-4 sm:px-6 border-y border-[#3C3F44]/10">
+      <section className="bg-[#D5BADB] py-12 md:py-20 px-4 sm:px-6 border-y border-[#43464E]/10">
         <Container>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 text-center">
 
           {['Purity', 'Harmony', 'Excellence'].map((value) => (
             <div key={value} className="px-2">
-              <h3 className="text-lg md:text-2xl font-bold text-[#3C3F44] mb-2 md:mb-4">
+              <h3 className="text-lg md:text-2xl font-bold text-[#43464E] mb-2 md:mb-4">
                 {value}
               </h3>
 

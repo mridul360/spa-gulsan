@@ -2,7 +2,7 @@ import React from 'react'
 import Container from '../Components/Layout/Container'
 
 function Footer() {
-  const primaryColor = "#3C3F44"
+  const primaryColor = "#43464E"
   
   const quickLinks = [
     { name: "About Us", href: "/" },

@@ -88,8 +88,8 @@ export default function Navbar() {
                 className={`text-xs uppercase tracking-widest px-4 py-2 rounded-full transition
                   ${
                     active === link.name
-                      ? "bg-[#3C3F44] text-white"
-                      : "text-gray-700 hover:bg-[#F3C2A4]"
+                      ? "bg-[#43464E] text-white"
+                      : "text-gray-700 hover:bg-[#D5BADB]"
                   }`}
               >
                 {link.name}
@@ -100,7 +100,7 @@ export default function Navbar() {
           {/* CTA Desktop */}
           <button
             onClick={() => handleScroll("booking", "Booking")}
-            className="hidden md:block bg-[#3C3F44] text-white px-5 py-2 rounded-full text-xs uppercase tracking-widest"
+            className="hidden md:block bg-[#43464E] text-white px-5 py-2 rounded-full text-xs uppercase tracking-widest"
           >
             Book Session
           </button>
@@ -116,7 +116,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden flex flex-col gap-2 px-4 pb-4 bg-[#F3C2A4]/90 backdrop-blur-md border-t border-[#3C3F44]/10">
+          <div className="md:hidden flex flex-col gap-2 px-4 pb-4 bg-[#D5BADB]/90 backdrop-blur-md border-t border-[#43464E]/10">
             {navLinks.map((link) => (
               <button
                 key={link.id}
@@ -134,7 +134,7 @@ export default function Navbar() {
                 className={`text-sm uppercase tracking-widest px-4 py-2 rounded-full text-left
                   ${
                     active === link.name
-                      ? "bg-[#3C3F44] text-white"
+                      ? "bg-[#43464E] text-white"
                       : "text-gray-700"
                   }`}
               >
@@ -145,7 +145,7 @@ export default function Navbar() {
             {/* Mobile CTA */}
             <button
               onClick={() => handleScroll("booking", "Booking")}
-              className="bg-[#3C3F44] text-white px-5 py-2 rounded-full text-sm uppercase tracking-widest mt-2"
+              className="bg-[#43464E] text-white px-5 py-2 rounded-full text-sm uppercase tracking-widest mt-2"
             >
               Book Session
             </button>

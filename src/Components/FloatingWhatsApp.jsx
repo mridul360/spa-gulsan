@@ -6,7 +6,7 @@ export default function FloatingWhatsApp() {
       href="https://wa.me/8801XXXXXXXXX?text=Hi%20I%20want%20to%20book%20a%20session"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-[9999] flex items-center justify-center w-14 h-14 rounded-full bg-green-500 shadow-lg hover:scale-105 transition md:hidden"
+      className="fixed bottom-5 right-5 z-[9999] flex items-center justify-center w-14 h-14 rounded-full bg-[#43464E] shadow-lg hover:scale-105 transition md:hidden"
     >
       {/* WhatsApp Icon */}
       <svg

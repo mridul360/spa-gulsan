@@ -69,7 +69,7 @@ const pricingData = [
 ];
 
 function Price() {
-  const primaryColor = "#3C3F44";
+  const primaryColor = "#43464E";
 
   const handleScroll = (id) => {
     const section = document.getElementById(id);
@@ -84,7 +84,7 @@ function Price() {
       {/* Hero */}
       <div
         className="py-14 md:py-20 text-white text-center px-4"
-        style={{ backgroundColor: "#3C3F44" }}
+        style={{ backgroundColor: "#43464E" }}
       >
         <Container>
           <h1 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4">
@@ -97,7 +97,7 @@ function Price() {
       </div>
 
       {/* Pricing */}
-      <div className="py-12 md:py-20 bg-[#F3C2A4] px-4 md:px-0">
+      <div className="py-12 md:py-20 bg-[#D5BADB] px-4 md:px-0">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
 

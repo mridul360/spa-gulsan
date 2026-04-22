@@ -40,7 +40,7 @@ const timeSlots = [
   "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"
 ]
 
-const primaryColor = "#3C3F44"
+const primaryColor = "#43464E"
 
 function Book() {
   const [step, setStep] = useState(1)
@@ -84,7 +84,7 @@ function Book() {
 
         {/* Header */}
         <div className="text-center mb-10">
-          <span className="text-[#3C3F44] font-semibold text-sm tracking-[0.2em] uppercase">
+          <span className="text-[#43464E] font-semibold text-sm tracking-[0.2em] uppercase">
             Gulshan Wellness Hub
           </span>
           <h1 className="text-3xl md:text-4xl font-bold text-[#2d2d2d] mt-2">
@@ -101,14 +101,14 @@ function Book() {
             <div key={i} className="flex-1 text-center">
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mx-auto
-                  ${step > i + 1 ? "bg-green-600 text-white" :
-                    step === i + 1 ? "text-white" : "bg-[#F3C2A4] text-[#3C3F44]/60"}`}
-                style={step === i + 1 ? { backgroundColor: primaryColor } : {}}
+                  ${step > i + 1 ? "text-white" :
+                    step === i + 1 ? "text-white" : "bg-[#D5BADB] text-[#43464E]/60"}`}
+                style={{ backgroundColor: step >= i + 1 ? primaryColor : "" }}
               >
                 {step > i + 1 ? "✓" : i + 1}
               </div>
               <p className={`mt-2 text-xs font-medium
-                ${step === i + 1 ? "text-[#3C3F44]" : "text-gray-400"}`}>
+                ${step === i + 1 ? "text-[#43464E]" : "text-gray-400"}`}>
                 {label}
               </p>
             </div>
@@ -130,7 +130,7 @@ function Book() {
                 <div className="space-y-6">
                   {Object.entries(groupedPackages).map(([category, pkgs]) => (
                     <div key={category}>
-                      <h3 className="text-sm font-bold uppercase tracking-widest text-[#3C3F44] mb-3 border-b border-[#F3C2A4] pb-1">
+                      <h3 className="text-sm font-bold uppercase tracking-widest text-[#43464E] mb-3 border-b border-[#D5BADB] pb-1">
                         {category}
                       </h3>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -144,12 +144,12 @@ function Book() {
                               onClick={() => setData({ ...data, package: pkg })}
                               className={`p-3 border rounded-xl cursor-pointer text-center transition-all
                                 ${isSelected
-                                  ? "border-[#3C3F44] bg-[#F3C2A4]/30"
+                                  ? "border-[#43464E] bg-[#D5BADB]/30"
                                   : "border-gray-200 hover:border-gray-400"
                                 }`}
                             >
                               <p className="text-xs text-gray-500 font-medium">{pkg.duration}</p>
-                              <p className="font-bold text-[#3C3F44] text-sm mt-1">
+                              <p className="font-bold text-[#43464E] text-sm mt-1">
                                 BDT {pkg.price.toLocaleString()}
                               </p>
                             </button>
@@ -162,12 +162,12 @@ function Book() {
 
                 {/* Selected summary inside scroll */}
                 {data.package && (
-                  <div className="mt-6 p-4 bg-[#3C3F44]/10 border border-[#3C3F44]/30 rounded-xl flex justify-between items-center">
+                  <div className="mt-6 p-4 bg-[#43464E]/10 border border-[#43464E]/30 rounded-xl flex justify-between items-center">
                     <div>
                       <p className="font-semibold text-[#2d2d2d]">{data.package.category}</p>
                       <p className="text-sm text-gray-500">{data.package.duration}</p>
                     </div>
-                    <p className="font-bold text-[#3C3F44] text-lg">
+                    <p className="font-bold text-[#43464E] text-lg">
                       BDT {data.package.price.toLocaleString()}
                     </p>
                   </div>
@@ -187,7 +187,7 @@ function Book() {
                   value={data.date}
                   onChange={handleChange}
                   min={new Date().toISOString().split("T")[0]}
-                  className="w-full p-3 border border-gray-200 rounded-xl mb-6 focus:outline-none focus:border-[#F3C2A4]"
+                  className="w-full p-3 border border-gray-200 rounded-xl mb-6 focus:outline-none focus:border-[#D5BADB]"
                 />
 
                 <label className="text-sm font-medium text-gray-600 mb-3 block">Select Time</label>
@@ -198,7 +198,7 @@ function Book() {
                       onClick={() => setData({ ...data, time: t })}
                       className={`p-2 text-center border rounded-lg cursor-pointer text-sm font-medium transition-all
                         ${data.time === t
-                          ? "bg-[#F3C2A4]/30 border-[#3C3F44] text-[#3C3F44]"
+                          ? "bg-[#D5BADB]/30 border-[#43464E] text-[#43464E]"
                           : "border-gray-200 hover:border-gray-400"
                         }`}
                     >
@@ -220,7 +220,7 @@ function Book() {
                   placeholder="e.g. Rahim Uddin"
                   value={data.name}
                   onChange={handleChange}
-                  className="w-full p-3 border border-gray-200 rounded-xl mb-4 focus:outline-none focus:border-[#F3C2A4]"
+                  className="w-full p-3 border border-gray-200 rounded-xl mb-4 focus:outline-none focus:border-[#D5BADB]"
                 />
 
                 <label className="text-sm font-medium text-gray-600 mb-1 block">Phone Number *</label>
@@ -229,7 +229,7 @@ function Book() {
                   placeholder="e.g. 01XXXXXXXXX"
                   value={data.phone}
                   onChange={handleChange}
-                  className="w-full p-3 border border-gray-200 rounded-xl mb-4 focus:outline-none focus:border-[#F3C2A4]"
+                  className="w-full p-3 border border-gray-200 rounded-xl mb-4 focus:outline-none focus:border-[#D5BADB]"
                 />
 
                 <label className="text-sm font-medium text-gray-600 mb-1 block">Notes (optional)</label>
@@ -239,7 +239,7 @@ function Book() {
                   value={data.notes}
                   onChange={handleChange}
                   rows={3}
-                  className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#F3C2A4] resize-none"
+                  className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#D5BADB] resize-none"
                 />
               </div>
             )}
@@ -249,7 +249,7 @@ function Book() {
               <div>
                 <h2 className="text-xl font-bold mb-6 text-[#2d2d2d]">Confirm Booking</h2>
 
-                <div className="bg-[#F3C2A4]/10 rounded-xl p-5 space-y-3 text-sm">
+                <div className="bg-[#D5BADB]/10 rounded-xl p-5 space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-500">Service</span>
                     <span className="font-semibold text-[#2d2d2d]">{data.package.category}</span>
@@ -280,9 +280,9 @@ function Book() {
                       <span className="font-semibold text-[#2d2d2d] text-right max-w-[60%]">{data.notes}</span>
                     </div>
                   )}
-                  <div className="border-t border-[#F3C2A4] pt-3 mt-2 flex justify-between items-center">
+                  <div className="border-t border-[#D5BADB] pt-3 mt-2 flex justify-between items-center">
                     <span className="font-bold text-base text-[#2d2d2d]">Total Bill</span>
-                    <span className="font-bold text-xl text-[#3C3F44]">
+                    <span className="font-bold text-xl text-[#43464E]">
                       BDT {data.package.price.toLocaleString()}
                     </span>
                   </div>
