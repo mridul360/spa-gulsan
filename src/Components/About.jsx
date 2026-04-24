@@ -44,7 +44,7 @@ const About = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 2500);
+    }, 2000);
 
     return () => clearInterval(timer);
   }, []);
@@ -62,27 +62,35 @@ const About = () => {
       </section>
 
       <section className="py-8 md:py-12">
-        <div className="relative overflow-hidden shadow-lg">
-          <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${current * 100}%)` }}
-          >
-            {slides.map((slide, index) => (
-              <div key={index} className="min-w-full">
+        <div className="relative h-[260px] sm:h-[380px] md:h-[620px] overflow-hidden shadow-lg">
+          {slides.map((slide, index) => {
+            const isActive = current === index;
+
+            return (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-opacity duration-[1600ms] ease-in-out ${
+                  isActive ? "opacity-100" : "opacity-0"
+                }`}
+              >
                 <img
                   src={slide.image}
                   alt={slide.alt}
-                  className="w-full h-[260px] sm:h-[380px] md:h-[620px] object-cover"
+                  className={`h-full w-full object-cover transition-transform duration-[4000ms] ease-out ${
+                    isActive ? "scale-110" : "scale-100"
+                  }`}
                 />
               </div>
-            ))}
-          </div>
+            );
+          })}
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-black/5 to-transparent" />
         </div>
       </section>
 
       <Container>
         <section className="pb-12 md:pb-20">
-          <div className="  p-6 sm:p-8 md:p-10 max-w-4xl mx-auto">
+          <div className="p-6 sm:p-8 md:p-10 max-w-4xl mx-auto">
             <p className="text-[11px] text-center sm:text-xs uppercase tracking-[0.28em] text-[#43464E]/60 mb-3">
               {aboutContent.label}
             </p>
