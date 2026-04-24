@@ -131,7 +131,12 @@ function Footer() {
         9AM - 10PM
       </span>
     </li>
-
+<li className="flex  md:justify-start gap-2">
+      <span>❤️</span>
+      <span className="text-white/80">
+        Made by Mridul
+      </span>
+    </li>
   </ul>
 
 </div>
