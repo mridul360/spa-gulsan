@@ -1,5 +1,6 @@
 import React from 'react'
 import Container from '../Components/Layout/Container'
+import reviewspa from "../assets/reviewspa.jpeg";
 
 const reviewsData = [
   {
@@ -37,25 +38,28 @@ function Reviews() {
   const primaryColor = "#43464E"
 
   return (
-    <div id="review" className="py-12 md:py-20 bg-[#D5BADB] px-4 md:px-0">
+    <div id="review" className="font-sans text-gray-800">
 
-      <Container>
-
-        {/* HEADER */}
-        <div className="text-center mb-10 md:mb-12">
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-800">
+      {/* Hero Section */}
+      <div
+        className="py-14 md:py-20 text-white text-center px-4 bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${reviewspa})`,
+          backgroundColor: primaryColor 
+        }}
+      >
+        <Container>
+          <h2 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4">
             What Our Clients Say
           </h2>
-
-          <div
-            className="w-16 md:w-24 h-1 mx-auto mt-3 md:mt-4 mb-4 md:mb-6"
-            style={{ backgroundColor: primaryColor }}
-          />
-
-          <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base md:text-xl max-w-2xl mx-auto">
             Real experiences from our valued guests — your wellness journey inspires us.
           </p>
-        </div>
+        </Container>
+      </div>
+
+      <div className="py-12 md:py-20 bg-[#D5BADB] px-4 md:px-0">
+        <Container>
 
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
@@ -115,6 +119,7 @@ function Reviews() {
         </div>
 
       </Container>
+      </div>
     </div>
   )
 }

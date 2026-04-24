@@ -15,10 +15,10 @@ const Home = () => {
       <Navbar />
 
       {/* Main Content Wrapper */}
-      <main className="flex-1 w-full pt-[70px]">
+      <main className="flex-1 w-full ">
         
         {/* Sections use inner Containers for horizontal padding */}
-        <section className="w-full py-6 sm:py-10">
+        <section className="w-full  sm:py-10">
           <About />
         </section>
 

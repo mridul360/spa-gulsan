@@ -5,7 +5,7 @@ import mmaaaasss from '../assets/mmaaaasss.webp'
 
 const About = () => {
   return (
-    <div id="about" className="bg-white text-stone-800">
+    <div id="about" className="bg-[#F4DADF] text-stone-800">
 
       {/* HERO */}
       <section className="bg-[#43464E] py-14 md:py-20 px-4 text-center text-white">
@@ -25,11 +25,11 @@ const About = () => {
           {/* TEXT - Order 2 on mobile to show image first */}
           <div className="order-2 md:order-1">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-5 md:mb-6 text-[#43464E]">
-              A Journey to Serenity
+              A Journey to Zenvy
             </h2>
 
             <p className="text-stone-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">
-              Founded in 2008, Serenity Wellness & Spa began with a simple mission:
+              Founded in 2007, Zenvy Wellness & Spa began with a simple mission:
               to create a space where the noise of the world fades away.
             </p>
 

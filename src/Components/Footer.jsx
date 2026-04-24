@@ -5,10 +5,10 @@ function Footer() {
   const primaryColor = "#43464E"
   
   const quickLinks = [
-    { name: "About Us", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Pricing", id: "price",href: "/price" },
-    { name: "Book a Session", href: "/book" }
+    { name: "About Us", href: "#about" },
+    { name: "Services", href: "#price" },
+    { name: "Pricing", href: "#price" },
+    { name: "Book a Session", href: "#booking" }
   ]
   
   const services = [
@@ -23,7 +23,7 @@ function Footer() {
   const socialLinks = [
     { name: "Facebook", icon: "📘", url: "https://facebook.com" },
     { name: "Instagram", icon: "📷", url: "https://instagram.com" },
-    { name: "WhatsApp", icon: "💬", url: "https://wa.me/8801614326888" },
+    { name: "WhatsApp", icon: "💬", url: "https://wa.me/8801863905937https://wa.me/message/HZBN77UPZTBQH1" },
     { name: "Twitter", icon: "🐦", url: "https://twitter.com" }
   ]
 
@@ -81,7 +81,7 @@ function Footer() {
         {services.map((service, idx) => (
           <li key={idx}>
             <a
-              href="/pricing"
+              href="#price"
               className="text-white/80 hover:text-white transition"
             >
               {service}

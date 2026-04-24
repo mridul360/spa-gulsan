@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import Container from "../Components/Layout/Container"
+import bookspa from "../assets/bookspa.jpeg";
 
 const allPackages = [
   { category: "Dry Massage",         duration: "60 Min",  price: 6000  },
@@ -79,21 +80,31 @@ function Book() {
   }
 
   return (
-    <div id="booking" className="py-12 md:py-20 bg-[#D4BADA]">
-      <Container>
+    <div id="booking" className="font-sans text-gray-800">
 
-        {/* Header */}
-        <div className="text-center mb-10">
-          <span className="text-[#43464E] font-semibold text-sm tracking-[0.2em] uppercase">
+      {/* Hero Section */}
+      <div
+        className="py-14 md:py-20 text-white text-center px-4 bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${bookspa})`,
+          backgroundColor: primaryColor 
+        }}
+      >
+        <Container>
+          <span className="text-white/80 font-semibold text-sm tracking-[0.2em] uppercase">
             Gulshan Wellness Hub
           </span>
-          <h1 className="text-3xl md:text-4xl font-bold text-[#2d2d2d] mt-2">
+          <h1 className="text-3xl md:text-5xl font-bold mt-2 mb-3 md:mb-4">
             Book Your Session
           </h1>
-          <p className="text-gray-500 mt-2 text-sm md:text-base">
+          <p className="text-base md:text-xl max-w-2xl mx-auto">
             Simple 4-step booking process
           </p>
-        </div>
+        </Container>
+      </div>
+
+      <div className="py-12 md:py-20 bg-[#D4BADA] px-4 md:px-0">
+        <Container>
 
         {/* Progress Steps */}
         <div className="flex justify-between max-w-2xl mx-auto mb-10">
@@ -342,6 +353,7 @@ function Book() {
         {/* ── END Card ── */}
 
       </Container>
+      </div>
     </div>
   )
 }

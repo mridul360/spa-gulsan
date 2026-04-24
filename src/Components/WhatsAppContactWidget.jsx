@@ -158,16 +158,16 @@ const WhatsAppContactWidget = () => {
         }
       `}</style>
 
-      <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-3">
+      <div className="fixed bottom-15 right-6 z-[9999] flex flex-col items-end gap-3">
         
         {/* Chat Box */}
         {open && (
-          <div className="w-[320px] max-w-[90vw] rounded-2xl shadow-2xl overflow-hidden bg-[#efeae2] flex flex-col animate-fadeInUp">
+          <div className="w-[320px] max-w-[90vw] rounded-2xl shadow-2xl overflow-hidden bg-[#F4DADF] flex flex-col animate-fadeInUp">
 
             {/* Header */}
             <div
               onClick={() => setOpen(false)}
-              className="bg-[#43464E] text-white px-4 py-3 flex justify-between cursor-pointer"
+              className="bg-[#b9ccff] text-white px-4 py-3 flex justify-between cursor-pointer"
             >
               <span className="font-medium text-sm">Chat with us</span>
               <span>⌄</span>
@@ -180,7 +180,7 @@ const WhatsAppContactWidget = () => {
                   key={i}
                   className={`max-w-[80%] px-3 py-2 rounded-xl text-sm shadow animate-fadeInUp ${
                     msg.type === "user"
-                      ? "bg-[#D5BADB]/50 self-end"
+                      ? "bg-[#F4DADF]/50 self-end"
                       : "bg-white self-start"
                   }`}
                 >
@@ -225,7 +225,7 @@ const WhatsAppContactWidget = () => {
         {/* Floating Button */}
         <button
           onClick={() => setOpen(!open)}
-          className="bg-[#43464E] text-white w-14 h-14 rounded-full text-2xl shadow-lg animate-pulse-soft hover:scale-110 transition"
+          className="bg-[#075e54] text-white w-14 h-14 rounded-full text-2xl shadow-lg animate-pulse-soft hover:scale-110 transition"
         >
           {open ? "✕" : "💬"}
         </button>

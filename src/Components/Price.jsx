@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "../Components/Layout/Container";
+import spaa from "../assets/spaa.jpeg";
 
 const pricingData = [
   {
@@ -83,8 +84,11 @@ function Price() {
 
       {/* Hero */}
       <div
-        className="py-14 md:py-20 text-white text-center px-4"
-        style={{ backgroundColor: "#43464E" }}
+        className="py-14 md:py-20 text-white text-center px-4 bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${spaa})`,
+          backgroundColor: "#43464E" 
+        }}
       >
         <Container>
           <h1 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4">
