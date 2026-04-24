@@ -3,6 +3,7 @@ import Container from "../Components/Layout/Container";
 import logo from "../assets/spaLogo.png";
 
 import { FaTelegramPlane, FaWhatsapp, FaInstagram } from "react-icons/fa";
+import { openLink } from "./linkUtils";
 import {
   RiHome4Line, RiHome4Fill,
   RiFileListLine, RiFileListFill,
@@ -10,58 +11,6 @@ import {
   RiChatSmile2Line, RiChatSmile2Fill,
   RiMailLine, RiMailFill,
 } from "react-icons/ri";
-
-// ── Smart deep-link opener ──────────────────────────────────────────
-// On mobile: tries app scheme first, falls back to web after 1.5s
-// On desktop: opens web URL directly
-const isMobile = () => /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-const openLink = (appScheme, webUrl) => {
-  if (isMobile()) {
-    // Try to open the native app
-    const start = Date.now();
-    window.location.href = appScheme;
-    // If app not installed, browser stays — fall back to web after 1.5s
-    setTimeout(() => {
-      if (Date.now() - start < 2000) {
-        window.open(webUrl, "_blank", "noopener,noreferrer");
-      }
-    }, 1500);
-  } else {
-    window.open(webUrl, "_blank", "noopener,noreferrer");
-  }
-};
-
-// ── Contact links with both app scheme + web URL ────────────────────
-const contactLinks = [
-  {
-    name: "Telegram",
-    handle: "@zenvyspagulshan",
-    appScheme: "tg://resolve?domain=ZENVYSPAGULSHAN",
-    webUrl: "https://t.me/ZENVYSPAGULSHAN",
-    bg: "#e8f4fd",
-    iconColor: "#229ED9",
-    Icon: FaTelegramPlane,
-  },
-  {
-    name: "WhatsApp",
-    handle: "+8801863905937",
-    appScheme: "whatsapp://send?phone=8801863905937&text=Hi%2C%20I%20want%20to%20book%20a%20session",
-    webUrl: "https://wa.me/8801863905937?text=Hi%2C%20I%20want%20to%20book%20a%20session",
-    bg: "#e8f8ee",
-    iconColor: "#25D366",
-    Icon: FaWhatsapp,
-  },
-  {
-    name: "Instagram",
-    handle: "@zenvyspagulshan",
-    appScheme: "instagram://user?username=zenvyspagulshan",
-    webUrl: "https://www.instagram.com/zenvyspagulshan",
-    bg: "#fdeef5",
-    iconColor: "#DD2A7B",
-    Icon: FaInstagram,
-  },
-];
 
 const navLinks = [
   {
@@ -94,19 +43,35 @@ const navLinks = [
   },
 ];
 
-const linkStyle = {
-  textDecoration: "none",
-  display: "flex",
-  alignItems: "center",
-  gap: 12,
-  padding: "10px 12px",
-  borderRadius: 12,
-  cursor: "pointer",
-  background: "transparent",
-  border: "none",
-  width: "100%",
-  textAlign: "left",
-};
+const contactLinks = [
+  {
+    name: "Telegram",
+    handle: "@zenvyspagulshan",
+    appScheme: "https://t.me/ZENVYSPAGULSHAN",
+    webUrl: "https://t.me/ZENVYSPAGULSHAN",
+    bg: "#e8f4fd",
+    iconColor: "#229ED9",
+    Icon: FaTelegramPlane,
+  },
+  {
+    name: "WhatsApp",
+    handle: "+8801863905937",
+    appScheme: "whatsapp://send?phone=8801863905937&text=Hi%2C%20I%20want%20to%20book%20a%20session",
+    webUrl: "https://wa.me/8801863905937?text=Hi%2C%20I%20want%20to%20book%20a%20session",
+    bg: "#e8f8ee",
+    iconColor: "#25D366",
+    Icon: FaWhatsapp,
+  },
+  {
+    name: "Instagram",
+    handle: "@zenvyspagulshan",
+    appScheme: "instagram://user?username=zenvyspagulshan",
+    webUrl: "https://www.instagram.com/zenvyspagulshan",
+    bg: "#fdeef5",
+    iconColor: "#DD2A7B",
+    Icon: FaInstagram,
+  },
+];
 
 export default function Navbar() {
   const [active, setActive] = useState("About");
@@ -138,13 +103,18 @@ export default function Navbar() {
   // Close desktop dropdown on outside click
   useEffect(() => {
     const handler = (e) => {
-      if (desktopDropdownRef.current && !desktopDropdownRef.current.contains(e.target))
+      if (
+        desktopDropdownRef.current &&
+        !desktopDropdownRef.current.contains(e.target)
+      ) {
         setContactOpen(false);
+      }
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  // ✅ FIX: Added missing opening <a> tag that was causing all JSX errors
   const ContactPopup = () => (
     <div
       style={{
@@ -158,15 +128,31 @@ export default function Navbar() {
       }}
     >
       {contactLinks.map(({ name, handle, appScheme, webUrl, bg, iconColor, Icon }) => (
-        <button
+        <a
           key={name}
-          style={linkStyle}
-          onClick={() => {
+          href={webUrl}
+          onClick={(e) => {
+            e.preventDefault();
+            setContactOpen(false); // Close popup immediately for better UX
             openLink(appScheme, webUrl);
-            setTimeout(() => setContactOpen(false), 300);
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(67,70,78,0.05)")}
-          onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            textDecoration: "none",
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            padding: "10px 12px",
+            borderRadius: 12,
+            cursor: "pointer",
+          }}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.background = "rgba(67,70,78,0.05)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.background = "transparent")
+          }
         >
           <div
             style={{
@@ -190,7 +176,7 @@ export default function Navbar() {
               {handle}
             </p>
           </div>
-        </button>
+        </a>
       ))}
     </div>
   );
@@ -283,12 +269,17 @@ export default function Navbar() {
             const isActive = active === link.name;
             return (
               <button
+                key={link.name}
                 onClick={() => scrollTo(link.id, link.name)}
-                className={`flex flex-col items-center gap-[3px] flex-1 py-2 rounded-xl transition-all ${isActive ? "bg-[#43464E]/[.08]" : ""}`}
+                className={`flex flex-col items-center gap-[3px] flex-1 py-2 rounded-xl transition-all ${
+                  isActive ? "bg-[#43464E]/[.08]" : ""
+                }`}
               >
                 {link.icon(isActive)}
                 {isActive && <span className="w-1 h-1 rounded-full bg-[#D5BADB]" />}
-                <span className={`text-[9px] uppercase tracking-wider ${isActive ? "text-[#43464E] font-medium" : "text-[#baaec0]"}`}>
+                <span className={`text-[9px] uppercase tracking-wider ${
+                  isActive ? "text-[#43464E] font-medium" : "text-[#baaec0]"
+                }`}>
                   {link.name}
                 </span>
               </button>
@@ -298,7 +289,9 @@ export default function Navbar() {
           {/* Contact */}
           <button
             onClick={() => setContactOpen((o) => !o)}
-            className={`flex flex-col items-center gap-[3px] flex-1 py-2 rounded-xl transition-all ${contactOpen ? "bg-[#43464E]/[.08]" : ""}`}
+            className={`flex flex-col items-center gap-[3px] flex-1 py-2 rounded-xl transition-all ${
+              contactOpen ? "bg-[#43464E]/[.08]" : ""
+            }`}
           >
             <div className="relative">
               {contactOpen
@@ -307,17 +300,17 @@ export default function Navbar() {
               }
               <span style={{
                 position: "absolute",
-                top: -2,
-                right: -2,
-                width: 7,
-                height: 7,
+                top: -2, right: -2,
+                width: 7, height: 7,
                 borderRadius: "50%",
                 background: "#D5BADB",
                 border: "1.5px solid white",
               }} />
             </div>
             {contactOpen && <span className="w-1 h-1 rounded-full bg-[#D5BADB]" />}
-            <span className={`text-[9px] uppercase tracking-wider ${contactOpen ? "text-[#43464E] font-medium" : "text-[#baaec0]"}`}>
+            <span className={`text-[9px] uppercase tracking-wider ${
+              contactOpen ? "text-[#43464E] font-medium" : "text-[#baaec0]"
+            }`}>
               Contact
             </span>
           </button>
@@ -329,11 +322,15 @@ export default function Navbar() {
               <button
                 key={link.name}
                 onClick={() => scrollTo(link.id, link.name)}
-                className={`flex flex-col items-center gap-[3px] flex-1 py-2 rounded-xl transition-all ${isActive ? "bg-[#43464E]/[.08]" : ""}`}
+                className={`flex flex-col items-center gap-[3px] flex-1 py-2 rounded-xl transition-all ${
+                  isActive ? "bg-[#43464E]/[.08]" : ""
+                }`}
               >
                 {link.icon(isActive)}
                 {isActive && <span className="w-1 h-1 rounded-full bg-[#D5BADB]" />}
-                <span className={`text-[9px] uppercase tracking-wider ${isActive ? "text-[#43464E] font-medium" : "text-[#baaec0]"}`}>
+                <span className={`text-[9px] uppercase tracking-wider ${
+                  isActive ? "text-[#43464E] font-medium" : "text-[#baaec0]"
+                }`}>
                   {link.name}
                 </span>
               </button>

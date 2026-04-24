@@ -107,7 +107,7 @@ function Footer() {
     <li className="flex md:justify-start gap-2">
       <span>📍</span>
       <span className="text-white/80">
-        Gulshan-2, Dhaka
+        Gulshan 2,Dhaka 1212,premier destination for rejuvenation
       </span>
     </li>
 

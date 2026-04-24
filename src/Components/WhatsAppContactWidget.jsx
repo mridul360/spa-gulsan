@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { openLink } from "./linkUtils";
 
 const WhatsAppContactWidget = () => {
   const [open, setOpen] = useState(true);
@@ -63,10 +64,10 @@ const WhatsAppContactWidget = () => {
   };
 
   const redirectToWhatsApp = (text) => {
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-      text
-    )}`;
-    window.open(url, "_blank");
+    const webUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
+    const appScheme = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(text)}`;
+    
+    openLink(appScheme, webUrl);
   };
 
   const sendMessage = () => {

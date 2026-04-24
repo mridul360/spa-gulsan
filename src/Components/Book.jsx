@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import Container from "../Components/Layout/Container"
+import { openLink } from "./linkUtils";
 import bookspa from "../assets/bookspa.jpeg";
 
 const allPackages = [
@@ -76,7 +77,10 @@ function Book() {
 📞 Phone : ${data.phone}
 📝 Notes : ${data.notes || "N/A"}
     `
-    window.open(`https://wa.me/8801863905937?text=${encodeURIComponent(message)}`, "_blank")
+    const webUrl = `https://wa.me/8801863905937?text=${encodeURIComponent(message)}`;
+    const appScheme = `whatsapp://send?phone=8801863905937&text=${encodeURIComponent(message)}`;
+    
+    openLink(appScheme, webUrl);
   }
 
   return (
