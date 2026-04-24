@@ -1,13 +1,56 @@
-import React from 'react'
-import Container from './Layout/Container'
-import dryMassage from '../assets/dry-massage.webp'
-import mmaaaasss from '../assets/mmaaaasss.webp'
+import React, { useEffect, useState } from "react";
+import Container from "./Layout/Container";
+import dryMassage from "../assets/dry-massage.webp";
+import mmaaaasss from "../assets/mmaaaasss.webp";
+import neck from "../assets/neck.jpeg";
+import neck2 from "../assets/neck2.jpeg";
+import neck3 from "../assets/neck3.jpeg";
+
+const slides = [
+  {
+    image: dryMassage,
+    alt: "Spa interior",
+  },
+  {
+    image: mmaaaasss,
+    alt: "Therapeutic massage",
+  },
+  {
+    image: neck,
+    alt: "Neck massage",
+  },
+  {
+    image: neck2,
+    alt: "Neck massage",
+  },
+  {
+    image: neck3,
+    alt: "Neck massage",
+  },
+];
+
+const aboutContent = {
+  label: "Spa Interior",
+  title: "The art of relaxation.",
+  text1:
+    "Founded in 2007, Zenvy Wellness & Spa began with a simple mission: to create a space where the noise of the world fades away.",
+  text2:
+    "Our therapists combine ancient techniques with modern science to provide a restorative experience tailored to your needs.",
+};
 
 const About = () => {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 2500);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div id="about" className="bg-[#F4DADF] text-stone-800">
-
-      {/* HERO */}
       <section className="bg-[#43464E] py-14 md:py-20 px-4 text-center text-white">
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-3 md:mb-4">
           Our Heritage
@@ -18,100 +61,67 @@ const About = () => {
         </p>
       </section>
 
-      {/* STORY */}
-      <Container>
-        <section className="py-12 md:py-20 grid grid-cols-1 md:md:grid-cols-2 gap-10 md:gap-16 items-center">
+      <section className="py-8 md:py-12">
+        <div className="relative overflow-hidden shadow-lg">
+          <div
+            className="flex transition-transform duration-700 ease-in-out"
+            style={{ transform: `translateX(-${current * 100}%)` }}
+          >
+            {slides.map((slide, index) => (
+              <div key={index} className="min-w-full">
+                <img
+                  src={slide.image}
+                  alt={slide.alt}
+                  className="w-full h-[260px] sm:h-[380px] md:h-[620px] object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          {/* TEXT - Order 2 on mobile to show image first */}
-          <div className="order-2 md:order-1">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-5 md:mb-6 text-[#43464E]">
-              A Journey to Zenvy
+      <Container>
+        <section className="pb-12 md:pb-20">
+          <div className="  p-6 sm:p-8 md:p-10 max-w-4xl mx-auto">
+            <p className="text-[11px] text-center sm:text-xs uppercase tracking-[0.28em] text-[#43464E]/60 mb-3">
+              {aboutContent.label}
+            </p>
+
+            <h2 className="text-2xl text-center sm:text-3xl md:text-5xl font-bold text-[#43464E] leading-tight mb-5">
+              {aboutContent.title}
             </h2>
 
-            <p className="text-stone-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">
-              Founded in 2007, Zenvy Wellness & Spa began with a simple mission:
-              to create a space where the noise of the world fades away.
+            <p className="text-sm sm:text-base md:text-lg text-stone-700 leading-7 md:leading-8 mb-4">
+              {aboutContent.text1}
             </p>
 
-            <p className="text-stone-600 leading-relaxed text-sm md:text-base">
-              Our therapists combine ancient techniques with modern science to
-              provide a restorative experience tailored to your needs.
+            <p className="text-sm sm:text-base md:text-lg text-stone-600 leading-7 md:leading-8">
+              {aboutContent.text2}
             </p>
           </div>
-
-          {/* IMAGE - Order 1 on mobile */}
-          <div className="relative order-1 md:order-2">
-            <img
-              src={dryMassage}
-              alt="Spa interior"
-              className="rounded-lg shadow-xl w-full h-auto object-cover"
-            />
-
-            {/* QUOTE (hidden on mobile) */}
-            <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-[#808080] p-4 md:p-8 hidden sm:block">
-              <p className="text-lg md:text-2xl text-white italic">
-                "The art of relaxation."
-              </p>
-            </div>
-          </div>
-
         </section>
       </Container>
 
-      {/* EXPERTISE SECTION */}
-      <Container>
-        <section className="py-12 md:py-20 grid grid-cols-1 md:md:grid-cols-2 gap-10 md:gap-16 items-center border-t border-[#43464E]/5">
-
-          {/* IMAGE */}
-          <div className="relative">
-            <img
-              src={mmaaaasss}
-              alt="Therapeutic massage"
-              className="rounded-lg shadow-xl w-full h-auto object-cover"
-            />
-          </div>
-
-          {/* TEXT */}
-          <div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-5 md:mb-6 text-[#43464E]">
-              Unmatched Expertise
-            </h2>
-
-            <p className="text-stone-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">
-              Every treatment at our hub is delivered by certified professionals who specialize in deep relaxation and muscle recovery. We prioritize your comfort and results above all else.
-            </p>
-            <p className="text-stone-600 leading-relaxed text-sm md:text-base">
-              Experience the perfect balance of therapeutic pressure and soothing ambiance, designed to melt away the stress of urban life.
-            </p>
-          </div>
-
-        </section>
-      </Container>
-
-      {/* VALUES */}
       <section className="bg-[#D5BADB] py-12 md:py-20 px-4 sm:px-6 border-y border-[#43464E]/10">
         <Container>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 text-center">
+            {["Purity", "Harmony", "Excellence"].map((value) => (
+              <div key={value} className="px-2">
+                <h3 className="text-lg md:text-2xl font-bold text-[#43464E] mb-2 md:mb-4">
+                  {value}
+                </h3>
 
-          {['Purity', 'Harmony', 'Excellence'].map((value) => (
-            <div key={value} className="px-2">
-              <h3 className="text-lg md:text-2xl font-bold text-[#43464E] mb-2 md:mb-4">
-                {value}
-              </h3>
-
-              <p className="text-stone-700 text-xs sm:text-sm font-light">
-                We commit to the highest standards of service and organic products in everything we do.
-              </p>
-            </div>
-          ))}
-
+                <p className="text-stone-700 text-xs sm:text-sm font-light">
+                  We commit to the highest standards of service and organic
+                  products in everything we do.
+                </p>
+              </div>
+            ))}
           </div>
         </Container>
-
       </section>
-
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;
