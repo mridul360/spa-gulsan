@@ -68,6 +68,7 @@ const contactLinks = [
     bg: "#fff0f0",
     iconColor: "#d32f2f",
     Icon: RiPhoneFill,
+    external: false,
   },
   {
     name: "Telegram",
@@ -76,14 +77,16 @@ const contactLinks = [
     bg: "#e8f4fd",
     iconColor: "#229ED9",
     Icon: FaTelegramPlane,
+    external: true,
   },
   {
     name: "WhatsApp",
     handle: "+8801863905937",
-    href: "https://api.whatsapp.com/send?phone=8801863905937&text=Hi%2C%20I%20want%20to%20book%20a%20session",
+    href: "https://wa.me/8801863905937?text=Hi%2C%20I%20want%20to%20book%20a%20session",
     bg: "#e8f8ee",
     iconColor: "#25D366",
     Icon: FaWhatsapp,
+    external: true,
   },
   {
     name: "Instagram",
@@ -92,6 +95,7 @@ const contactLinks = [
     bg: "#fdeef5",
     iconColor: "#DD2A7B",
     Icon: FaInstagram,
+    external: true,
   },
 ];
 
@@ -103,8 +107,12 @@ const isMobileDevice = () =>
 export default function Navbar() {
   const [active, setActive] = useState("About");
   const [contactOpen, setContactOpen] = useState(false);
+
   const desktopDropdownRef = useRef(null);
-  const tapLockRef = useRef(false);
+  const mobilePopupRef = useRef(null);
+  const mobileContactButtonRef = useRef(null);
+
+  const isMobile = typeof window !== "undefined" ? isMobileDevice() : false;
 
   const scrollTo = (id, name) => {
     setActive(name);
@@ -131,52 +139,32 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const handler = (e) => {
-      if (
+    const handleOutside = (e) => {
+      const target = e.target;
+
+      const insideDesktop =
         desktopDropdownRef.current &&
-        !desktopDropdownRef.current.contains(e.target)
-      ) {
-        setContactOpen(false);
-      }
+        desktopDropdownRef.current.contains(target);
+
+      const insideMobilePopup =
+        mobilePopupRef.current && mobilePopupRef.current.contains(target);
+
+      const insideMobileButton =
+        mobileContactButtonRef.current &&
+        mobileContactButtonRef.current.contains(target);
+
+      if (insideDesktop || insideMobilePopup || insideMobileButton) return;
+
+      setContactOpen(false);
     };
 
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    document.addEventListener("pointerdown", handleOutside);
+    return () => document.removeEventListener("pointerdown", handleOutside);
   }, []);
 
-  const openContact = (href) => {
-    if (isMobileDevice()) {
-      window.location.assign(href);
-      return;
-    }
-
-    if (href.startsWith("tel:")) {
-      window.location.assign(href);
-      return;
-    }
-
-    window.open(href, "_blank", "noopener,noreferrer");
-    setContactOpen(false);
-  };
-
-  const handleContactPress = (e, href) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (tapLockRef.current) return;
-    tapLockRef.current = true;
-
-    openContact(href);
-
-    setTimeout(() => {
-      tapLockRef.current = false;
-    }, 700);
-  };
-
-  const ContactPopup = () => (
+  const ContactPopup = ({ mobile = false }) => (
     <div
-      onClick={(e) => e.stopPropagation()}
-      onTouchStart={(e) => e.stopPropagation()}
+      ref={mobile ? mobilePopupRef : null}
       style={{
         background: "rgba(255,255,255,0.98)",
         backdropFilter: "blur(20px)",
@@ -184,71 +172,73 @@ export default function Navbar() {
         border: "1px solid rgba(67,70,78,0.1)",
         boxShadow: "0 8px 32px rgba(67,70,78,0.15)",
         padding: 8,
-        minWidth: 210,
-        pointerEvents: "auto",
+        minWidth: mobile ? "min(92vw, 320px)" : 220,
       }}
     >
-      {contactLinks.map(({ name, handle, href, bg, iconColor, Icon }, idx) => (
-        <button
-          key={idx}
-          type="button"
-          onClick={(e) => handleContactPress(e, href)}
-          onTouchStart={(e) => handleContactPress(e, href)}
-          style={{
-            width: "100%",
-            border: "none",
-            outline: "none",
-            textDecoration: "none",
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            padding: "10px 12px",
-            borderRadius: 12,
-            cursor: "pointer",
-            textAlign: "left",
-            background: "transparent",
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(67,70,78,0.05)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "transparent";
-          }}
-        >
-          <div
+      {contactLinks.map(
+        ({ name, handle, href, bg, iconColor, Icon, external }, idx) => (
+          <a
+            key={idx}
+            href={href}
+            target={external && !isMobile ? "_blank" : "_self"}
+            rel={external && !isMobile ? "noopener noreferrer" : undefined}
             style={{
-              width: 36,
-              height: 36,
-              borderRadius: "50%",
-              background: bg,
+              width: "100%",
+              textDecoration: "none",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
+              gap: 12,
+              padding: "10px 12px",
+              borderRadius: 12,
+              cursor: "pointer",
+              textAlign: "left",
+              WebkitTapHighlightColor: "transparent",
+            }}
+            onClick={() => {
+              if (!isMobile) {
+                setTimeout(() => setContactOpen(false), 100);
+              }
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(67,70,78,0.05)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
             }}
           >
-            <Icon size={17} color={iconColor} />
-          </div>
-
-          <div>
-            <p
+            <div
               style={{
-                margin: 0,
-                fontSize: 13,
-                fontWeight: 600,
-                color: "#43464E",
+                width: 36,
+                height: 36,
+                borderRadius: "50%",
+                background: bg,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
               }}
             >
-              {name}
-            </p>
-            <p style={{ margin: 0, fontSize: 11, color: "#a090a4" }}>
-              {handle}
-            </p>
-          </div>
-        </button>
-      ))}
+              <Icon size={17} color={iconColor} />
+            </div>
+
+            <div>
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: "#43464E",
+                }}
+              >
+                {name}
+              </p>
+              <p style={{ margin: 0, fontSize: 11, color: "#a090a4" }}>
+                {handle}
+              </p>
+            </div>
+          </a>
+        )
+      )}
     </div>
   );
 
@@ -328,10 +318,10 @@ export default function Navbar() {
               transform: "translateX(-50%)",
               marginBottom: 10,
               zIndex: 9999,
-              pointerEvents: "auto",
+              width: "min(92vw, 320px)",
             }}
           >
-            <ContactPopup />
+            <ContactPopup mobile />
           </div>
         )}
 
@@ -363,6 +353,7 @@ export default function Navbar() {
           })()}
 
           <button
+            ref={mobileContactButtonRef}
             onClick={() => setContactOpen((o) => !o)}
             className={`flex flex-col items-center gap-[3px] flex-1 py-2 rounded-xl transition-all ${
               contactOpen ? "bg-[#43464E]/[.08]" : ""
@@ -387,9 +378,11 @@ export default function Navbar() {
                 }}
               />
             </div>
+
             {contactOpen && (
               <span className="w-1 h-1 rounded-full bg-[#D5BADB]" />
             )}
+
             <span
               className={`text-[9px] uppercase tracking-wider ${
                 contactOpen ? "text-[#43464E] font-medium" : "text-[#baaec0]"
