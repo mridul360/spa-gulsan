@@ -56,8 +56,8 @@ const contactLinks = [
   },
   {
     name: "WhatsApp",
-    handle: "+880 186 390 5937",
-    href: "https://wa.me/message/HZBN77UPZTBQH1",
+    handle: "+8801863905937",
+    href: "https://wa.me/8801863905937?text=hi%20i%20want%20to%20book",
     bg: "#e8f8ee",
     iconColor: "#25D366",
     Icon: FaWhatsapp,
@@ -109,47 +109,64 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const ContactPopup = () => (
-    <div
-      style={{
-        background: "rgba(255,255,255,0.96)",
-        backdropFilter: "blur(20px)",
-        borderRadius: 16,
-        border: "1px solid rgba(67,70,78,0.1)",
-        boxShadow: "0 8px 32px rgba(67,70,78,0.12)",
-        padding: 8,
-        minWidth: 210,
-      }}
-    >
-      {contactLinks.map(({ name, handle, href, bg, iconColor, Icon }) => (
-        <a
-          key={name}
-          href={href}
-          target="_blank"
-          rel="noreferrer"
-          onClick={() => setContactOpen(false)}
-          style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 12, padding: "10px 12px", borderRadius: 12 }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(67,70,78,0.05)")}
-          onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
-        >
+  // Fixed ContactPopup – uses window.open to ensure navigation works
+  const ContactPopup = () => {
+    const handleClick = (url) => {
+      window.open(url, "_blank", "noopener,noreferrer");
+      setContactOpen(false);
+    };
+
+    return (
+      <div
+        style={{
+          background: "rgba(255,255,255,0.96)",
+          backdropFilter: "blur(20px)",
+          borderRadius: 16,
+          border: "1px solid rgba(67,70,78,0.1)",
+          boxShadow: "0 8px 32px rgba(67,70,78,0.12)",
+          padding: 8,
+          minWidth: 210,
+        }}
+      >
+        {contactLinks.map(({ name, handle, href, bg, iconColor, Icon }) => (
           <div
+            key={name}
+            onClick={() => handleClick(href)}
             style={{
-              width: 34, height: 34, borderRadius: "50%",
-              background: bg,
-              display: "flex", alignItems: "center", justifyContent: "center",
-              flexShrink: 0,
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              padding: "10px 12px",
+              borderRadius: 12,
+              cursor: "pointer",
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(67,70,78,0.05)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
-            <Icon size={17} color={iconColor} />
+            <div
+              style={{
+                width: 34,
+                height: 34,
+                borderRadius: "50%",
+                background: bg,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
+            >
+              <Icon size={17} color={iconColor} />
+            </div>
+            <div>
+              <p style={{ margin: 0, fontSize: 12, fontWeight: 500, color: "#43464E" }}>{name}</p>
+              <p style={{ margin: 0, fontSize: 10, color: "#a090a4" }}>{handle}</p>
+            </div>
           </div>
-          <div>
-            <p style={{ margin: 0, fontSize: 12, fontWeight: 500, color: "#43464E" }}>{name}</p>
-            <p style={{ margin: 0, fontSize: 10, color: "#a090a4" }}>{handle}</p>
-          </div>
-        </a>
-      ))}
-    </div>
-  );
+        ))}
+      </div>
+    );
+  };
 
   return (
     <>
