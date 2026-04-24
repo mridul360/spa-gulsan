@@ -23,7 +23,7 @@ function Footer() {
   const socialLinks = [
     { name: "Facebook", icon: "📘", url: "https://facebook.com" },
     { name: "Instagram", icon: "📷", url: "https://instagram.com" },
-    { name: "WhatsApp", icon: "💬", url: "https://wa.me/8801863905937https://wa.me/message/HZBN77UPZTBQH1" },
+    { name: "WhatsApp", icon: "💬", url: "https://wa.me/8801863905937?text=Hi%2C%20I%20want%20to%20book%20a%20session" },
     { name: "Twitter", icon: "🐦", url: "https://twitter.com" }
   ]
 
@@ -138,7 +138,7 @@ function Footer() {
 
         {/* Copyright Bar */}
         <div className="border-t border-white/20 pt-8 text-center text-white/70 text-sm">
-          <p>&copy; {new Date().getFullYear()} Silken Touch Spa, Gulshan. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Zenvy Spa Gulshan. All rights reserved.</p>
         </div>
       </Container>
     </footer>
