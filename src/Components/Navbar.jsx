@@ -10,6 +10,7 @@ import {
   RiCalendarLine, RiCalendarFill,
   RiChatSmile2Line, RiChatSmile2Fill,
   RiMailLine, RiMailFill,
+  RiPhoneFill,
 } from "react-icons/ri";
 
 const navLinks = [
@@ -45,10 +46,19 @@ const navLinks = [
 
 const contactLinks = [
   {
+    name: "Call Now",
+    handle: "+8801863905937",
+    appScheme: "tel:+8801863905937",
+    webUrl: "tel:+8801863905937",
+    bg: "#fff0f0",
+    iconColor: "#d32f2f",
+    Icon: RiPhoneFill,
+  },
+  {
     name: "Telegram",
     handle: "@zenvyspagulshan",
-    appScheme: "https://t.me/ZENVYSPAGULSHAN",
-    webUrl: "https://t.me/ZENVYSPAGULSHAN",
+    appScheme: "tg://resolve?domain=ZENVYSPAGULSHAN",
+    webUrl: "https://t.me/zenvyspagulshan",
     bg: "#e8f4fd",
     iconColor: "#229ED9",
     Icon: FaTelegramPlane,
@@ -127,14 +137,16 @@ export default function Navbar() {
         minWidth: 210,
       }}
     >
-      {contactLinks.map(({ name, handle, appScheme, webUrl, bg, iconColor, Icon }) => (
+      {contactLinks.map(({ name, handle, appScheme, webUrl, bg, iconColor, Icon }, idx) => (
         <a
-          key={name}
+          key={idx}
           href={webUrl}
           onClick={(e) => {
             e.preventDefault();
-            setContactOpen(false); // Close popup immediately for better UX
             openLink(appScheme, webUrl);
+            // Small delay before closing state to ensure the link click
+            // is fully processed by the mobile browser before unmounting.
+            setTimeout(() => setContactOpen(false), 300);
           }}
           target="_blank"
           rel="noopener noreferrer"
